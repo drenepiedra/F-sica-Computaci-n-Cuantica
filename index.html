@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Computación Cuántica — Landing</title>
+    <meta name="description"
+        content="Resumen práctico sobre computación cuántica: qué es, orígenes, fundamentos, qubits, hardware, diferencias con la computación clásica y aplicaciones (criptografía, construcción de ordenadores cuánticos)." />
+    <style>
+        :root {
+            --bg: #0b1220;
+            --card: #0f1724;
+            --muted: #94a3b8;
+            --accent: #7c3aed;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-2: rgba(255, 255, 255, 0.02);
+            --radius: 14px;
+            --maxw: 1100px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: linear-gradient(180deg, var(--bg), #071022);
+            color: #e6eef8
+        }
+
+        .container {
+            max-width: var(--maxw);
+            margin: 32px auto;
+            padding: 24px
+        }
+
+        aside {
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 20px
+        }
+
+        .boton_conocer_mas {
+            background-color: #7c3aed;
+            border-radius: 10px;
+            border: none;
+            padding: 10px;
+            color: white;
+        }
+
+        .boton_conocer_mas:hover {
+            background-color: #5f12e6;
+            transform: scale(1.05);
+            transition: 0.5s;
+        }
+
+        .logo {
+            width: 72px;
+            height: 72px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent), #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 6px 30px rgba(12, 13, 30, 0.6)
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0
+        }
+
+        p.lead {
+            color: var(--muted);
+            margin-top: 6px
+        }
+
+        nav {
+            margin-left: auto
+        }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 14px;
+            font-size: 14px
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 24px;
+            margin-top: 20px
+        }
+
+        .card {
+            background: linear-gradient(180deg, var(--card), #071020);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(2, 6, 23, 0.6)
+        }
+
+        .section {
+            margin-top: 20px
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px
+        }
+
+        h2 {
+            margin: 0 0 10px 0
+        }
+
+        .muted {
+            color: var(--muted);
+            font-size: 14px
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: var(--glass);
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .feature {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start
+        }
+
+        .feature svg {
+            flex: 0 0 56px;
+            background: var(--glass-2);
+            padding: 10px;
+            border-radius: 10px
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            text-align: left
+        }
+
+        table th {
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        .chart-wrap {
+            display: flex;
+            gap: 12px;
+            flex-direction: column
+        }
+
+        canvas {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+            border-radius: 10px;
+            padding: 10px
+        }
+
+        footer {
+            margin-top: 30px;
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center
+        }
+
+        /* responsive */
+        @media (max-width:900px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        /* small util */
+        .row {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .pill {
+            background: var(--glass);
+            padding: 6px 12px;
+            border-radius: 999px
+        }
+
+        .btn {
+            background: var(--accent);
+            border: none;
+            padding: 10px 14px;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer
+        }
+
+        .btn.ghost {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.06)
+        }
+
+        details summary {
+            list-style: none;
+            cursor: pointer
+        }
+
+        details[open] summary::after {
+            content: " ▲"
+        }
+
+        summary::after {
+            content: " ▼"
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🧪</div>
+            <div>
+                <h1>Computación Cuántica</h1>
+                <p class="lead">Resumen interactivo: fundamentos, qubits, hardware, teoría y aplicaciones en
+                    informática.</p>
+            </div>
+            <nav>
+                <a href="#que-es">Qué es</a>
+                <a href="#fundamentos">Fundamentos</a>
+                <a href="#hardware">Hardware</a>
+                <a href="#aplicaciones">Aplicaciones</a>
+            </nav>
+        </header>
+
+        <main class="hero">
+            <div>
+                <section id="que-es" class="card section" style="margin-top: 0;">
+                    <div class="row"><span class="badge">Introducción</span></div>
+                    <h2>¿En qué consiste la computación cuántica?</h2>
+                    <p class="muted">La computación cuántica usa los principios de la mecánica cuántica (superposición,
+                        entrelazamiento) para procesar información de manera distinta a la clásica. Un computador
+                        cuántico opera con <strong>qubits</strong> que pueden representar múltiples estados
+                        simultáneamente, lo que permite algoritmos con potencial de aceleración para ciertos problemas.
+                    </p>
+
+                    <div class="section">
+                        <h3>Origen</h3>
+                        <p class="muted">El concepto nace en los años 1980-1990: Richard Feynman y David Deutsch
+                            propusieron que simulaciones de sistemas cuánticos serían más eficientes en máquinas
+                            cuánticas y formalizaron la idea de computación cuántica universal.</p>
+                    </div>
+
+                    <div class="section">
+                        <h3>Bases y teoría</h3>
+                        <p class="muted">La teoría de la computación cuántica combina teoría de la información con
+                            mecánica cuántica: los estados son vectores en un espacio de Hilbert, las operaciones son
+                            transformaciones unitarias y la medida colapsa un estado a un resultado clásico
+                            probabilístico. Existen modelos formales (circuitos cuánticos, autómatas cuánticos,
+                            computación adiabática) y resultados teóricos como el algoritmo de Shor y Grover que
+                            muestran ventajas cuánticas para ciertos problemas.</p>
+                    </div>
+                    <a href="https://es.wikipedia.org/wiki/Computaci%C3%B3n_cu%C3%A1ntica">
+                        <button class="boton_conocer_mas">Conocer
+                            Más</button>
+                    </a>
+                </section>
+
+                <section id="fundamentos" class="card section">
+                    <h2>Fundamentos clave</h2>
+                    <div class="grid-2">
+                        <div>
+                            <h3>Qubits</h3>
+                            <p class="muted">Un qubit es la unidad básica de información cuántica. A diferencia del bit
+                                clásico (0 o 1), un qubit puede estar en una <em>superposición</em> α|0> + β|1> (α,β
+                                números complejos con |α|^2+|β|^2=1). Cuando se mide, se obtiene 0 o 1 con
+                                probabilidades |α|^2 y |β|^2 respectivamente.</p>
+                            <ul class="muted">
+                                <li><strong>Superposición</strong>: múltiples estados a la vez.</li>
+                                <li><strong>Entrelazamiento</strong>: correlaciones cuánticas que no tienen análogo
+                                    clásico.</li>
+                                <li><strong>Interferencia</strong>: fases que amplifican o cancelan amplitudes.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Teoría cuántica de la computación</h3>
+                            <p class="muted">Formalmente, un algoritmo cuántico se describe como una secuencia de
+                                puertas cuánticas (operadores unitarios) aplicadas a un registro de qubits seguido de
+                                una medida. Conceptos importantes: reversibilidad, transformaciones unitarias,
+                                operadores de medición, teoremas de no-clonación y error cuántico.</p>
+                        </div>
+                    </div>
+
+                    <details class="section">
+                        <summary><strong>Diferencias clave con la clásica</strong></summary>
+                        <div class="section">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Aspecto</th>
+                                        <th>Computación clásica</th>
+                                        <th>Computación cuántica</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Unidad básica</td>
+                                        <td>Bit (0/1)</td>
+                                        <td>Qubit (superposición)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Operaciones</td>
+                                        <td>Puertas lógicas (AND, OR, NOT)</td>
+                                        <td>Puertas unitarias (Hadamard, CNOT, Phase)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Paralelismo</td>
+                                        <td>Paralelismo físico/algorítmico</td>
+                                        <td>Paralelismo cuántico via superposición</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Errores</td>
+                                        <td>Tolerancia por redundancia</td>
+                                        <td>Error cuántico; necesidad de corrección cuántica</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Aplicaciones emblemáticas</td>
+                                        <td>Sistemas transaccionales, web, IA</td>
+                                        <td>Factorización, simulación cuántica, optimización</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+
+                </section>
+
+                <section id="hardware" class="card section">
+                    <h2>Hardware para computación cuántica</h2>
+                    <p class="muted">Existen varios enfoques experimentales para construir qubits físicos. Cada
+                        tecnología tiene pros y contras respecto a coherencia, escalabilidad y facilidad de control.</p>
+                    <div class="grid-2">
+                        <div>
+                            <h3>Tecnologías principales</h3>
+                            <ul class="muted">
+                                <li><strong>Qubits superconductores</strong>: circuitos superconductores a microondas
+                                    (ej. IBM, Google). Ventaja: integrabilidad. Desventaja: requieren criogenia a mK.
+                                </li>
+                                <li><strong>Qubits de iones atrapados</strong>: iones individuales atrapados y
+                                    manipulados con láser. Muy buena fidelidad y coherencia, pero el escalado es
+                                    retador.</li>
+                                <li><strong>Qubits de espín (puntos cuánticos)</strong>: usan el espín de electrones en
+                                    semiconductores; prometen compatibilidad con tecnología CMOS.</li>
+                                <li><strong>Computación óptica/cuántica fotónica</strong>: usa fotones para procesar
+                                    información; facilita conectividad y temperatura ambiente en algunos enfoques.</li>
+                                <li><strong>Computación adiabática / annealers</strong>: (ej. D-Wave) especializados en
+                                    optimización, no son equivalentes a un computador cuántico universal en el sentido
+                                    más fuerte.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Condiciones y desafíos</h3>
+                            <p class="muted">Para que el hardware sea útil se requieren:</p>
+                            <ul class="muted">
+                                <li><strong>Coherencia</strong>: tiempos de coherencia largos comparados con tiempos de
+                                    operación.</li>
+                                <li><strong>Fidelidad</strong>: puertas con bajas tasas de error.</li>
+                                <li><strong>Escalabilidad</strong>: interconexión y control de muchos qubits.</li>
+                                <li><strong>Corrección de errores cuánticos</strong>: códigos (Surface code, Shor code)
+                                    para tolerancia a fallos.</li>
+                                <li><strong>Entorno controlado</strong>: criogenia, vacío, control de ruido
+                                    electromagnético.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="aplicaciones" class="card section">
+                    <h2>Aplicaciones en informática</h2>
+                    <p class="muted">La computación cuántica impacta varias áreas de la informática: criptografía,
+                        simulación de materiales, optimización, aprendizaje automático y más.</p>
+
+                    <div class="grid-2">
+                        <div>
+                            <h3>Criptografía cuántica</h3>
+                            <p class="muted">Incluye dos ramas principales:</p>
+                            <ul class="muted">
+                                <li><strong>Criptografía cuántica para comunicación segura</strong> (ej. QKD - Quantum
+                                    Key Distribution) que usa principios cuánticos para detectar espionaje en la
+                                    transmisión de claves.</li>
+                                <li><strong>Impacto en criptografía clásica</strong>: algoritmos cuánticos como Shor
+                                    pueden factorizar grandes enteros eficientemente, poniendo en riesgo RSA/EC; por eso
+                                    se investiga criptografía post-cuántica (no cuántica pero resistente a ataques
+                                    cuánticos).</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3>Otros usos</h3>
+                            <p class="muted">Simulación de sistemas cuánticos (química cuántica), optimización
+                                combinatoria (algoritmos híbridos), mejora de ciertos algoritmos de búsqueda y
+                                potenciales ventajas en aprendizaje automático (modelos cuánticos/inferencias
+                                aceleradas).</p>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>Construcción del computador cuántico</h3>
+                        <ol class="muted">
+                            <li>Diseño y fabricación de qubits físicos (materiales, microfabricación).</li>
+                            <li>Control y lectura: electrónica a baja temperatura, técnicas ópticas o microondas.</li>
+                            <li>Corrección de errores y arquitectura de control.</li>
+                            <li>Software y compiladores cuánticos que traduzcan algoritmos a puertas nativas.</li>
+                            <li>Integración y escalado en racks/cuartos criogénicos con infraestructura de control.</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section class="card section">
+                    <h2>Resumen: ventajas & limitaciones</h2>
+                    <div class="grid-2">
+                        <div>
+                            <h3>Ventajas</h3>
+                            <ul class="muted">
+                                <li>Velocidad potencial para problemas específicos (factorización, simulación cuántica).
+                                </li>
+                                <li>Modelado natural de sistemas cuánticos (química, materiales).</li>
+                                <li>Nuevas clases de algoritmos y modelos de computación.</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3>Limitaciones</h3>
+                            <ul class="muted">
+                                <li>Ruido y decoherencia.</li>
+                                <li>Escalado técnico y coste experimental.</li>
+                                <li>No todos los problemas obtienen ventaja cuántica.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <aside style="min-width:300px ">
+                <div class="card">
+                    <h3>Visualizaciones</h3>
+                    <div class="chart-wrap">
+                        <div>
+                            <canvas id="pieApps" width="400" height="260"></canvas>
+                        </div>
+                        <div style="margin-top:12px">
+                            <canvas id="lineQubits" width="400" height="220"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card section">
+                    <h3>Bibliografía</h3>
+                    <ul class="muted">
+                        <li>Algoritmos: <em>Shor</em> (factorización), <em>Grover</em> (búsqueda).</li>
+                        <li>Fuentes : Google , Wikipedia</li>
+                        <li>Investigadores:
+                            <strong>
+                                Daniel Rene Piedra , Dante Manuel Alfonso , Sergio David Alfonso Mendoza
+                            </strong>
+                        </li>
+                    </ul>
+                    <div style="display:flex;gap:8px;margin-top:10px">
+                        <button class="btn" id="downloadBtn">Descargar resumen</button>
+                        <button class="btn" id="openGallery">Galería</button>
+                    </div>
+                </div>
+
+            </aside>
+
+        </main>
+
+        <footer>
+            <p>Resumen Informativo sobre computación cuántica.</p>
+        </footer>
+    </div>
+
+    <template>
+        <div
+            class="flex flex-col q-px-md q-py-sm bg-gradient-to-br from-gray-100 to-gray-700 border-1 rounded-2xl border-gray-200">
+            <div class="text-[14px] font-semibold">Total de Huéspedes</div>
+            <div class="text-[12px] font-regular opacity-50">Datos generales de huéspedes</div>
+
+            <ComponentLoader v-if="loading" />
+
+            <div v-else class="column q-px-md q-pb-md items-center q-col-gutter-lg">
+                <div class="flex justify-center">
+                    <div ref="chartContainer" class="relative"
+                        :style="{ width: `${canvasSize}px`, height: `${canvasSize}px` }">
+                        <canvas ref="chartRef" class="absolute-full"></canvas>
+
+                        <div v-for="(seg, i) in segmentsWithPercentage" :key="`badge-${i}`"
+                            class="absolute bg-white rounded-full shadow-2 border flex items-center justify-center percentage-badge"
+                            :style="getCircleStyle(i)">
+                            <span class="font-bold text-center"
+                                :style="{ color: 'black', fontSize: `${fontSize}px`, lineHeight: 1 }">
+                                {{ seg.percentage }}%
+                            </span>
+                        </div>
+
+                        <div class="absolute rounded-full flex flex-col no-wrap items-center justify-center"
+                            :style="centerCircleStyle">
+                            <span class="font-semibold text-[20px] text-center">{{ formatNumber(total) }}</span>
+                            <span class="font-regular text-[12px] opacity-50 text-center">Huéspedes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full">
+                    <div class="h-full w-full flex items-center justify-center gap-2 mt-4">
+                        <div class="row q-gutter-y-sm no-wrap justify-around w-full">
+                            <div v-for="(seg, i) in segmentsWithPercentage" :key="i"
+                                class="row flex items-center no-wrap">
+                                <div class="row items-center no-wrap">
+                                    <div class="w-2 h-2 rounded-full q-mr-sm" :style="{ background: seg.color }" />
+                                    <div class="row font-regular text-[12px] gap-3">
+                                        <span>{{ ` ${seg.legend}` }}</span>
+                                        <span class="font-semibold">{{ formatNumber(seg.cantidad) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+
+    <div id="galleryModal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%;
+    background:rgba(0,0,0,0.7); justify-content:center; align-items:center;">
+
+        <div style="background:var(--card); border-radius:var(--radius); padding:20px;
+        width:90%; max-width:800px; position:relative;">
+
+            <button id="closeModal" style="position:absolute; top:10px; right:15px; background:var(--accent); color:white;
+            border:none; border-radius:50%; width:30px; height:30px; cursor:pointer;">×</button>
+
+            <h3 style="margin-top:0;">Galería de Computación Cuántica</h3>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Blochsphere.svg" alt="Blochsphere"
+                    style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px;">
+
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/DWave_128chip.jpg" alt="D-Wave Chip"
+                    style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px;">
+
+                <img src="https://www.quandela.com/wp-content/uploads/2024/09/OVHcloud-MosaiQ.webp"
+                    alt="Quantum entanglement diagram"
+                    style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px;">
+
+                <img src="https://www.quandela.com/wp-content/uploads/2024/09/QC3-768x576.png"
+                    alt="Quantum circuit diagram"
+                    style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px;">
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+        document.getElementById('openGallery').addEventListener('click', () => {
+            document.getElementById("galleryModal").style.display = "flex";
+        });
+
+        document.getElementById('closeModal').addEventListener('click', () => {
+            document.getElementById('galleryModal').style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('galleryModal');
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        const pieData = {
+            labels: ['Criptografía', 'Simulación', 'Optimización', 'ML/IA', 'Investigación'],
+            datasets: [{
+                data: [25, 30, 18, 12, 15],
+                backgroundColor: ['rgba(124,58,237,0.9)', 'rgba(6,182,212,0.9)', 'rgba(99,102,241,0.9)', 'rgba(52,211,153,0.9)', 'rgba(249,115,22,0.9)'],
+                hoverOffset: 6
+            }]
+        };
+
+        const lineData = {
+            labels: ['2015', '2017', '2019', '2021', '2023', '2025 (hipot)'],
+            datasets: [{
+                label: 'Qubits (ej. systems, valores ilustrativos)',
+                data: [5, 50, 72, 200, 1000, 4000],
+                tension: 0.3,
+                fill: true,
+                backgroundColor: 'rgba(124,58,237,0.12)',
+                borderColor: 'rgba(124,58,237,0.95)',
+                pointRadius: 6
+            }]
+        };
+
+        window.addEventListener('load', () => {
+            const pieCtx = document.getElementById('pieApps');
+            const lineCtx = document.getElementById('lineQubits');
+
+            new Chart(pieCtx, {
+                type: 'pie',
+                data: pieData,
+                options: {
+                    plugins: { legend: { position: 'bottom', labels: { color: '#cfe9ff' } } }
+                }
+            });
+
+            new Chart(lineCtx, {
+                type: 'line',
+                data: lineData,
+                options: {
+                    scales: {
+                        x: { ticks: { color: '#bcd9ff' } },
+                        y: { beginAtZero: true, ticks: { color: '#bcd9ff' } }
+                    },
+                    plugins: { legend: { display: true, labels: { color: '#cfe9ff' } } }
+                }
+            });
+
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+            const summary = {
+                titulo: 'Computación Cuántica - Resumen',
+                secciones: [
+                    { id: 'que-es', titulo: 'Qué es', texto: 'La computación cuántica usa principios de la mecánica cuántica...' },
+                    { id: 'fundamentos', titulo: 'Fundamentos', texto: 'Qubits, superposición, entrelazamiento, teoría...' },
+                    { id: 'hardware', titulo: 'Hardware', texto: 'Enfoques: superconductores, iones, puntos cuánticos...' },
+                    { id: 'aplicaciones', titulo: 'Aplicaciones', texto: 'Criptografía, simulación, optimización...' }
+                ]
+            };
+            const blob = new Blob([JSON.stringify(summary, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = 'resumen_computacion_cuantica.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        document.getElementById('toggleTheme').addEventListener('click', () => {
+            document.documentElement.style.setProperty('--bg', getComputedStyle(document.documentElement).getPropertyValue('--bg') === '#0b1220' ? '#f7fafc' : '#0b1220');
+            document.body.style.color = document.body.style.color === 'black' ? '#e6eef8' : 'black';
+        });
+
+        document.querySelectorAll('nav a').forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href')).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+    </script>
+</body>
+
+</html>
