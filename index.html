@@ -50,6 +50,91 @@
             gap: 20px
         }
 
+        nav {
+            padding: 0 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.39);
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            
+        }
+        
+        nav a {
+            color: #333;
+            text-decoration: none;
+            padding: 18px 24px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        nav a:hover {
+            color: #1a2980;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            transition: width 0.3s ease;
+            border-radius: 3px 3px 0 0;
+        }
+        
+        nav a:hover::after {
+            width: 80%;
+        }
+         /* Iconos para cada enlace */
+        nav a[href="#que-es"]::before {
+            content: "❓";
+        }
+        
+        nav a[href="#fundamentos"]::before {
+            content: "📚";
+        }
+        
+        nav a[href="#hardware"]::before {
+            content: "💻";
+        }
+        
+        nav a[href="#aplicaciones"]::before {
+            content: "🚀";
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 0;
+            }
+            
+            nav a {
+                justify-content: center;
+            }
+            
+            nav a:last-child {
+                border-bottom: none;
+            }
+            
+            nav a::after {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
         .boton_conocer_mas {
             background-color: #7c3aed;
             border-radius: 10px;
@@ -288,8 +373,13 @@
                             muestran ventajas cuánticas para ciertos problemas.</p>
                     </div>
                     <a href="https://es.wikipedia.org/wiki/Computaci%C3%B3n_cu%C3%A1ntica">
+                        <button class="boton_conocer_mas">Wikipedia</button>    
+                           
+                    </a>
+                    <a href="https://www.ibm.com/es-es/think/topics/quantum-computing">
                         <button class="boton_conocer_mas">Conocer
-                            Más</button>
+                            Más</button>   
+                           
                     </a>
                 </section>
 
@@ -444,7 +534,7 @@
                 </section>
 
                 <section class="card section">
-                    <h2>Resumen: ventajas & limitaciones</h2>
+                    <h2>Resumen: ventajas y limitaciones</h2>
                     <div class="grid-2">
                         <div>
                             <h3>Ventajas</h3>
@@ -465,7 +555,14 @@
                         </div>
                     </div>
                 </section>
-
+                <section class="card section">
+                    <h2>Conclusión</h2>
+                    <p class="muted">La computación cuántica es una tecnología que se está desarrollando de manera
+                        progresiva y en constante evolución. Aunque aún no se ha alcanzado un nivel de precisión
+                        y eficiencia que permita realizar tareas específicas, la tecnología sigue siendo una
+                        oportunidad para avanzar en el campo de la informática y desarrollar nuevas aplicaciones y
+                        soluciones para problemas complejos.</p>
+                </section>
             </div>
 
             <aside style="min-width:300px ">
@@ -485,15 +582,16 @@
                     <h3>Bibliografía</h3>
                     <ul class="muted">
                         <li>Algoritmos: <em>Shor</em> (factorización), <em>Grover</em> (búsqueda).</li>
-                        <li>Fuentes : Google , Wikipedia</li>
+                        <li>Fuentes : Google , Wikipedia, IBM</li>
                         <li>Investigadores:
-                            <strong>
-                                Daniel Rene Piedra , Dante Manuel Alfonso , Sergio David Alfonso Mendoza
-                            </strong>
+                            <ul style="font-size: 30px;">
+                                <li>Daniel Rene Piedra</li>
+                               <li> Dante Manuel Alfonso</li>
+                               <li> Sergio David Alfonso Mendoza </li> 
+                            </ul>
                         </li>
                     </ul>
                     <div style="display:flex;gap:8px;margin-top:10px">
-                        <button class="btn" id="downloadBtn">Descargar resumen</button>
                         <button class="btn" id="openGallery">Galería</button>
                     </div>
                 </div>
@@ -558,7 +656,6 @@
             </div>
         </div>
     </template>
-
 
     <div id="galleryModal" style="display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%;
     background:rgba(0,0,0,0.7); justify-content:center; align-items:center;">
@@ -659,23 +756,7 @@
 
         });
 
-        document.getElementById('downloadBtn').addEventListener('click', () => {
-            const summary = {
-                titulo: 'Computación Cuántica - Resumen',
-                secciones: [
-                    { id: 'que-es', titulo: 'Qué es', texto: 'La computación cuántica usa principios de la mecánica cuántica...' },
-                    { id: 'fundamentos', titulo: 'Fundamentos', texto: 'Qubits, superposición, entrelazamiento, teoría...' },
-                    { id: 'hardware', titulo: 'Hardware', texto: 'Enfoques: superconductores, iones, puntos cuánticos...' },
-                    { id: 'aplicaciones', titulo: 'Aplicaciones', texto: 'Criptografía, simulación, optimización...' }
-                ]
-            };
-            const blob = new Blob([JSON.stringify(summary, null, 2)], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url; a.download = 'resumen_computacion_cuantica.json';
-            a.click();
-            URL.revokeObjectURL(url);
-        });
+        
 
         document.getElementById('toggleTheme').addEventListener('click', () => {
             document.documentElement.style.setProperty('--bg', getComputedStyle(document.documentElement).getPropertyValue('--bg') === '#0b1220' ? '#f7fafc' : '#0b1220');
